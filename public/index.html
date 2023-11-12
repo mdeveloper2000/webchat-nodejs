@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <title>Webchat</title>
+</head>
+
+<body style="overflow: hidden;">
+    
+    <div class="container-fluid">
+        <div class="row bg-primary fw-bolder text-light">
+            <h1 class="text-center">
+                <i class="bi bi-chat-fill"></i> Webchat
+            </h1>
+        </div>
+        <div class="row">
+            <div class="col-9">
+                <ul class="chatList list-group mt-2" style="max-height: calc(100vh - 110px); min-height: calc(100vh - 110px); overflow-y: scroll;"></ul>
+            </div>
+            <div class="col-3 bg-info border">
+                <ul class="userList list-group mt-1" style="overflow-y: scroll; cursor: pointer;"></ul>
+            </div>
+            <div class="col-12 bg-warning p-2">
+                <div class="row">
+                    <div class="col-8">
+                        <input type="text" class="form-control form-control-sm" id="messageInput" placeholder="Digite a mensagem e aperte ENTER" disabled />
+                    </div>                    
+                    <div class="col-3">                        
+                        <input class="form-control form-control-sm" type="file" name="picture" id="picture" />
+                    </div>
+                    <div class="col-1">
+                        <button type="button" class="btn btn-primary btn-sm" id="fileSend">
+                            <i class="bi bi-send-fill"></i> Enviar
+                        </button>
+                    </div>                    
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    <div class="modal" data-bs-backdrop="static" tabindex="-1" id="nickModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Escolher apelido</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="nickInput" placeholder="Apelido" maxlength="20" />
+                </div>
+                <div class="modal-footer">                    
+                    <button type="button" class="btn btn-primary" id="loginBtn">
+                        <i class="bi bi-check2"></i> Login
+                    </button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="dismiss">
+                        <i class="bi bi-x"></i> Cancelar
+                    </button>                    
+                    <div class="container mt-3">                
+                        <div class="alert alert-danger" role="alert" style="display: none;">
+                            <i class="bi bi-info-circle-fill"></i> <span id="message"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast hide text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">                
+                <strong class="me-auto">Aviso</strong>                
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body fw-bold">This is a toast message</div>
+        </div>
+    </div>
+      
+    <script>
+        var myModal = new bootstrap.Modal(document.getElementById('nickModal'))
+        myModal.show()
+    </script>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js"></script>    
+
+</body>
+
+</html>
